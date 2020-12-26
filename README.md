@@ -1,6 +1,6 @@
 # Скрипты для автоматизации Vikings: War of Clans
 
-Скрипты пишутся на языке Python. Исполняются с помощью утилиты [PengueeBot 1.10.41](https://github.com/1Ridav/PengueeBot/releases/tag/v1.10.41)
+Скрипты пишутся на языке Python. Исполняются с помощью утилиты [PengueeBot 1.10.41](https://github.com/1Ridav/PengueeBot/releases/tag/v1.10.41), для её работы необходим [Java Runtime Environment](https://www.java.com/ru/download/manual.jsp).
 
 ## Убиватель захватчиков и духов
 
