@@ -1,5 +1,7 @@
 # Скрипты для автоматизации Vikings: War of Clans
 
+Скрипты пишутся на языке Python. Исполняются с помощью утилиты [PengueeBot 1.10.41](https://github.com/1Ridav/PengueeBot/releases/tag/v1.10.41)
+
 ## Убиватель захватчиков и духов
 
 Скрипт [kill.single.invader.by.watchtower.py](kill.single.invader.by.watchtower.py).
@@ -15,5 +17,5 @@
 1. _иногда застревает и что-то не находит_ - это бывает, если курсор уже на позиции, но клик не сработал из-за лагов. При наведении курсора на разные элементы они подсвечиваются и перестают совпадать с шаблоном во фрагментах. Как решение, в скрипте после кликов на элементы сдвигать курсор, чтобы элемент снова выглядел как сохранённый в фрагменте.
 
 ## Полезные ссылки ##
-1. [GitHub BengueeBot](https://github.com/1Ridav/PengueeBot)
+1. [GitHub PengueeBot](https://github.com/1Ridav/PengueeBot)
 1. [YouTube PengueeBot](https://www.youtube.com/watch?v=ctXy8Mnzbbw)
