@@ -1,3 +1,6 @@
-﻿$hwnd = 15862746 // узнать можно, наведя на окно Vikings, слева в информационной панели появится значение в hWND
+﻿$hwnd = WNDFIND("Vikings", 0)
+$hwnd = HGET(100, 100)
+
 WNDPOS($hwnd,25,32) 
 WNDSIZE($hwnd,916,909)
+ 
