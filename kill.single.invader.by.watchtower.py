@@ -9,7 +9,7 @@ from java.awt.event import InputEvent, KeyEvent
 #invaderName = "gascon"
 #invaderName = "khasar"
 #invaderName = "maneater"
-invaderName = "celt"
+#invaderName = "celt"
 #invaderName = "wildboar"
 #invaderName = "hounds"
 #invaderName = "lynx"
@@ -25,7 +25,7 @@ invaderName = "celt"
 #invaderName = "moonwolf"
 #invaderName = "rockboar"
 #invaderName = "plagueraven"
-#invaderName = "helheimwarrior"
+invaderName = "helheimwarrior"
 #invaderName = "waylandsbride"
 #invaderName = "jotunheimursus"
 # ... config
@@ -44,7 +44,7 @@ wndC = Position((wnd.p2.x-wnd.p1.x)/2+x, (wnd.p2.y-wnd.p1.y)/2+y)
 
 toolbar = Region(240, 104, 444, 154)
 watchtower = Region(wnd.p1.x + (wnd.p2.x-wnd.p1.x - 850)/2, wnd.p1.y + 149, wnd.p1.x + (wnd.p2.x-wnd.p1.x - 850)/2 + 850, wnd.p1.y + 149 +665)
-relocate = Region(230, 260, 730, 740)
+relocate = Region(230, 230, 730, 740)
 lair = Region(233, 171, 233+500, 171+598)
 
 aroundPositions = [Position(-160, 0), Position(160, 0), Position(-70, 50), Position(70, 50), Position(70, -50), Position(-70, -50), Position(0, 100)]
@@ -128,7 +128,7 @@ while True:
                     break
                 elif a.find("vikings.relocate.relocation"):
                     a.sleep(800)
-                    a.mouseClick(610, 610) # Buy and apply
+                    a.mouseClick(610, 630) # Buy and apply
                     a.sleep(300)
                     a.mouseClick(390, 620) # Yes
                     a.sleep(800)
@@ -144,8 +144,8 @@ while True:
                     break
                 elif a.find("vikings.level"):
                     print("found level")
-                    while a.find("vikings.Xclose2"):
-                        a.findClick("vikings.Xclose2")
+                    while a.find("vikings.town.Xclose"):
+                        a.findClick("vikings.town.Xclose")
                         a.sleep(200)
                         a.mouseMove(a.mousePos().add(50, 50))
                         a.sleep(600)
