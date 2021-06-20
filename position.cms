@@ -3,4 +3,6 @@ $hwnd = HGET(100, 100)
 
 WNDPOS($hwnd,25,32) 
 WNDSIZE($hwnd,916,909)
+
+HALT
  
