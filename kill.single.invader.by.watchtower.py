@@ -3,13 +3,14 @@ from bot.penguee import Position, Region, Action
 from java.awt.event import InputEvent, KeyEvent
 #from win32gui import win32gui
 
+maxHits = 0
 
 # config ... vikings.invaders.
 #invaderName = "royalguardsman"
 #invaderName = "gascon"
 #invaderName = "khasar"
 #invaderName = "maneater"
-invaderName = "celt"
+#invaderName = "celt"
 #invaderName = "wildboar"
 #invaderName = "hounds"
 #invaderName = "lynx"
@@ -23,12 +24,16 @@ invaderName = "celt"
 #invaderName = "abbysguard"
 #invaderName = "northernvulture"
 #invaderName = "moonwolf"
-#invaderName = "rockboar"
+invaderName = "rockboar"
 #invaderName = "plagueraven"
 #invaderName = "helheimwarrior"
 #invaderName = "waylandsbride"
 #invaderName = "jotunheimursus"
+#invaderName = "marshnixa"
+
+maxHits = 20
 # ... config
+print ("configuration: invaderName=%s, maxHits=%s" % (invaderName, maxHits))
 
 a = Action()
 a.setMouseDelay(320)
@@ -44,7 +49,7 @@ wndC = Position((wnd.p2.x-wnd.p1.x)/2+x, (wnd.p2.y-wnd.p1.y)/2+y)
 
 toolbar = Region(240, 104, 444, 154)
 watchtower = Region(wnd.p1.x + (wnd.p2.x-wnd.p1.x - 850)/2, wnd.p1.y + 149, wnd.p1.x + (wnd.p2.x-wnd.p1.x - 850)/2 + 850, wnd.p1.y + 149 +665)
-relocate = Region(230, 260, 730, 740)
+relocate = Region(230, 230, 730, 760)
 lair = Region(233, 171, 233+500, 171+598)
 
 aroundPositions = [Position(-160, 0), Position(160, 0), Position(-70, 50), Position(70, 50), Position(70, -50), Position(-70, -50), Position(0, 100)]
@@ -111,7 +116,7 @@ while True:
                 a.sleep(600)
                 a.grab(relocate.p1, relocate.p2)
                 a.searchRect(relocate.p1, relocate.p2)
-                if a.find("vikings.view"):
+                if a.find("vikings.location.view"):
                     a.sleep(800)
                     # a.findClick("vikings.Xclose")
                     a.mouseClick(710, 320) # X close
@@ -128,7 +133,7 @@ while True:
                     break
                 elif a.find("vikings.relocate.relocation"):
                     a.sleep(800)
-                    a.mouseClick(610, 610) # Buy and apply
+                    a.mouseClick(610, 630) # Buy and apply
                     a.sleep(300)
                     a.mouseClick(390, 620) # Yes
                     a.sleep(800)
@@ -142,10 +147,10 @@ while True:
                     print("found position")
                     resultPosition = Position(aroundPositions[i])
                     break
-                elif a.find("vikings.level"):
+                elif a.find("vikings.location.level"):
                     print("found level")
-                    while a.find("vikings.Xclose2"):
-                        a.findClick("vikings.Xclose2")
+                    while a.find("vikings.location.Xclose"):
+                        a.findClick("vikings.location.Xclose")
                         a.sleep(200)
                         a.mouseMove(a.mousePos().add(50, 50))
                         a.sleep(600)
@@ -191,13 +196,24 @@ while True:
                 a.grab(lair.p1, lair.p2)
                 if a.find("vikings.sustainedattack"):
                     a.sleep(150)
-                    if a.find("vikings.normalattack"):
+                    if maxHits > 0 and shots >= maxHits:
+                        #print("time to kill: %s shots of %s" % (shots, maxHits))
+                        if a.find("vikings.enhancedattack"):
+                            attack = a.findPos("vikings.enhancedattack")
+                            a.mouseMove(attack)
+                            a.sleep(150)
+                            a.mouseClick(a.mousePos())
+                            shots = shots + 1
+                            a.sleep(400)
+                            #print("shot %s/%s" % (shots, maxHits))
+                    elif a.find("vikings.normalattack"):
                         attack = a.findPos("vikings.normalattack")
                         a.mouseMove(attack)
                         a.sleep(150)
                         a.mouseClick(a.mousePos())
                         shots = shots + 1
                         a.sleep(400)
+                        #print("shot %s/%s" % (shots, maxHits))
                         a.mouseMove(a.mousePos().add(15, 35))
                         a.sleep(1200)
                 elif a.find("vikings.store"):
