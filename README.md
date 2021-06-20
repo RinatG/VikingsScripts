@@ -2,7 +2,7 @@
 
 Скрипты пишутся на языке Python. Исполняются с помощью утилиты [PengueeBot 1.10.41](https://github.com/1Ridav/PengueeBot/releases/tag/v1.10.41), для её работы необходим [Java Runtime Environment](https://www.java.com/ru/download/manual.jsp).
 
-Для запуска приложения нужно на один уровень с текущей папкой положить [PengueeBot 1.10.41](https://github.com/1Ridav/PengueeBot/releases/download/v1.10.41/penguee-latest-release.zip) в папку `1.10.42`
+Для запуска приложения нужно на один уровень с текущей папкой положить [PengueeBot 1.10.41](https://github.com/1Ridav/PengueeBot/releases/download/v1.10.41/penguee-latest-release.zip) в папку `1.10.41` (либо в любую другую, после исправив путь в [PengueeBot.bat](PengueeBot.bat)).
 
 ## Убиватель захватчиков и духов
 
