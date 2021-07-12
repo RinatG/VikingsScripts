@@ -22,14 +22,14 @@ maxHits = 0
 #invaderName = "barbarian"
 #invaderName = "centurion"
 
-invaderName = "invader"
+#invaderName = "invader"
 
 #invaderName = "abbysguard"
 #invaderName = "northernvulture"
 #invaderName = "moonwolf"
 #invaderName = "rockboar"
 #invaderName = "plagueraven"
-invaderName = "helheimwarrior"
+#invaderName = "helheimwarrior"
 #invaderName = "waylandsbride"
 #invaderName = "jotunheimursus"
 #invaderName = "marshnixa"
@@ -37,7 +37,7 @@ invaderName = "helheimwarrior"
 
 #invaderName = "ghosts"
 
-maxHits = 11
+maxHits = 20
 # ... config
 
 print ("configuration: invaderName=%s, maxHits=%s" % (invaderName, maxHits))
@@ -80,14 +80,14 @@ while True:
     a.searchRect(watchtower.p1, watchtower.p2)
     print("look for Watchtower's Navigator")
     a.sleep(400)
-    if a.find("vikings.watchtower.navigator"):
+    if a.findSimilar("vikings.watchtower.navigator", 0.9):
         
         a.mouseMove(120, 420) # first invader
         scrollCount = 0
         while a.find("vikings.invaders."+invaderName) == False:            
             a.sleep(200)
             a.mouseWheel(300)
-            a.sleep(400)
+            a.sleep(850)
             a.grab(watchtower.p1, watchtower.p2)
             scrollCount = scrollCount + 1
             if scrollCount > 20:
@@ -103,9 +103,12 @@ while True:
             if shouldJump:
                 print("jumping...")
                 a.mouseClick(a.findPos("vikings.watchtower.coordinates").add(150, 0))
-                a.sleep(300)
-                a.mouseClick(390, 620) # Yes
+                a.sleep(350)
+                a.mouseMove(390, 620) # Yes
+                a.sleep(200)
+                a.mouseClick(a.mousePos().add(5, 2)) # Yes
                 a.sleep(500)
+                
 
                 resultPosition = Position(0, 0)
                 for i in range(len(aroundPositions)):
@@ -135,7 +138,7 @@ while True:
                         print("found position")
                         resultPosition = Position(aroundPositions[i])
                         break
-                    elif a.find("vikings.relocate.relocation"):
+                    elif a.findSimilar("vikings.relocate.relocation", 0.9):
                         a.sleep(800)
                         a.mouseClick(620, 610) # Apply | Buy and apply
                         a.sleep(300)
@@ -153,7 +156,7 @@ while True:
                         print("found position")
                         resultPosition = Position(aroundPositions[i])
                         break
-                    elif a.find("vikings.location.level"):
+                    elif a.findSimilar("vikings.location.level", 0.9):
                         print("found level")
                         while a.find("vikings.location.Xclose"):
                             a.findClick("vikings.location.Xclose")
@@ -250,8 +253,6 @@ while True:
                         a.sleep(700)
                     elif a.findClick("vikings.store.apply"): # or Apply
                         a.sleep(700)
-##                    a.grab(lair.p1, lair.p2)
-##                    a.findClick("vikings.Xclose") # X close
                     a.mouseClick(770, 170) # X close
                     a.sleep(600)
                 elif a.find("vikings.tileamountof"):
