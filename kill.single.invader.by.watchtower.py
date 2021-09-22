@@ -35,9 +35,9 @@ maxHits = 0
 #invaderName = "marshnixa"
 #invaderName = "twilightfox"
 
-#invaderName = "ghosts"
+invaderName = "ghosts"
 
-maxHits = 20
+maxHits = 24 # -1
 # ... config
 
 print ("configuration: invaderName=%s, maxHits=%s" % (invaderName, maxHits))
@@ -98,7 +98,7 @@ while True:
             shouldJump = False
             invaderPos = a.findPos("vikings.invaders."+invaderName)
             a.searchRect(Position(invaderPos.x, invaderPos.y-40), Position(invaderPos.x+740, invaderPos.y+140))
-            shouldJump = not (a.find("vikings.watchtower.1km") or a.find("vikings.watchtower.2km") or a.find("vikings.watchtower.3km") or a.find("vikings.watchtower.4km") or a.find("vikings.watchtower.5km") or a.find("vikings.watchtower.6km") or a.find("vikings.watchtower.7km") or a.find("vikings.watchtower.8km"))
+            shouldJump = not (a.find("vikings.watchtower.1km") or a.find("vikings.watchtower.2km") or a.find("vikings.watchtower.3km") or a.find("vikings.watchtower.4km") or a.find("vikings.watchtower.5km") or a.find("vikings.watchtower.6km") or a.find("vikings.watchtower.7km") or a.find("vikings.watchtower.8km"))# or a.find("vikings.watchtower.9km") or a.find("vikings.watchtower.10km") or a.find("vikings.watchtower.11km") or a.find("vikings.watchtower.12km"))
 
             if shouldJump:
                 print("jumping...")
@@ -124,14 +124,15 @@ while True:
                         print("already on position")
                         resultPosition = Position(0, 0)
                         break
-                    elif a.findClick("vikings.relocate.buyandapply"):
-                        a.sleep(800)
-                        a.mouseClick(390, 620) # Yes
-                        a.sleep(800)
-                        print("found position")
-                        resultPosition = Position(aroundPositions[i])
-                        break
-                    elif a.findClick("vikings.relocate.apply"):
+                    # elif a.findClick("vikings.relocate.buyandapply"):
+                        # a.sleep(800)
+                        # a.mouseClick(390, 620) # Yes
+                        # a.sleep(800)
+                        # print("found position")
+                        # resultPosition = Position(aroundPositions[i])
+                        # break
+                    elif a.findSimilar("vikings.relocate.apply", 0.9):
+                        a.mouseClick(a.findSimilarPos("vikings.relocate.apply", 0.9))
                         a.sleep(800)
                         a.mouseClick(390, 620) # Yes
                         a.sleep(800)
@@ -140,16 +141,7 @@ while True:
                         break
                     elif a.findSimilar("vikings.relocate.relocation", 0.9):
                         a.sleep(800)
-                        a.mouseClick(620, 610) # Apply | Buy and apply
-                        a.sleep(300)
-                        a.mouseClick(390, 620) # Yes
-                        a.sleep(800)
-                        print("found position")
-                        resultPosition = Position(aroundPositions[i])
-                        break
-                    elif a.find("vikings.relocate.relocation2"):
-                        a.sleep(800)
-                        a.mouseClick(620, 610) # Apply | Buy and apply
+                        a.mouseClick(620, 630) # Apply | Buy and apply
                         a.sleep(300)
                         a.mouseClick(390, 620) # Yes
                         a.sleep(800)
@@ -158,8 +150,8 @@ while True:
                         break
                     elif a.findSimilar("vikings.location.level", 0.9):
                         print("found level")
-                        while a.find("vikings.location.Xclose"):
-                            a.findClick("vikings.location.Xclose")
+                        while a.findSimilar("vikings.location.Xclose", 0.9):
+                            a.mouseClick(a.findSimilarPos("vikings.location.Xclose", 0.9))
                             a.sleep(200)
                             a.mouseMove(a.mousePos().add(50, 50))
                             a.sleep(600)
@@ -194,6 +186,7 @@ while True:
                             a.mouseMove(a.mousePos().add(50, 50))
                             a.sleep(600)
                             a.grab(wnd.p1, wnd.p2)
+                            
                 a.mouseClick(wndC.add(-resultPosition.x, -resultPosition.y))
             else:
                 print("searching Info...")
@@ -209,37 +202,42 @@ while True:
                 a.grab(lair.p1, lair.p2)
                 if a.find("vikings.sustainedattack"):
                     a.sleep(150)
-                    if maxHits > 0 and shots >= maxHits:
+                    if maxHits >= 0 and shots >= maxHits:
                         #print("time to kill: %s shots of %s" % (shots, maxHits))
                         if a.find("vikings.enhancedattack"):
                             attack = a.findPos("vikings.enhancedattack")
                             a.mouseMove(attack)
-                            a.sleep(150)
+                            a.sleep(190)
                             a.mouseClick(a.mousePos())
                             shots = shots + 1
-                            a.sleep(400)
+                            a.sleep(370)
                             #print("shot %s/%s" % (shots, maxHits))
                             a.mouseMove(a.mousePos().add(15, 35))
-                            a.sleep(1200)
+                            a.sleep(1060)
                     elif a.find("vikings.normalattack"):
                         attack = a.findPos("vikings.normalattack")
                         a.mouseMove(attack)
-                        a.sleep(150)
+                        a.sleep(220)
                         a.mouseClick(a.mousePos())
                         shots = shots + 1
-                        a.sleep(370)
+                        a.sleep(335)
                         #print("shot %s/%s" % (shots, maxHits))
                         a.mouseMove(a.mousePos().add(15, 35))
-                        a.sleep(1110)
+                        a.sleep(1010)
                 elif a.find("vikings.store"):
                     a.sleep(150)
                     a.findClick("vikings.store")
                     a.sleep(400)
                     a.grab(lair.p1, lair.p2)
-                    if a.find("vikings.purchase.apply"):
-                        buy = a.findPos("vikings.purchase.apply")
-                    elif a.find("vikings.purchase.buyandapply"):
-                        buy = a.findPos("vikings.purchase.buyandapply")
+                    if a.find("vikings.store"):
+                        a.sleep(150)
+                        a.findClick("vikings.store")
+                        a.sleep(400)
+                        a.grab(lair.p1, lair.p2)
+                    if a.findSimilar("vikings.purchase.apply", 0.9):
+                        buy = a.findSimilarPos("vikings.purchase.apply", 0.9)
+                    elif a.findSimilar("vikings.purchase.buyandapply", 0.9):
+                        buy = a.findSimilarPos("vikings.purchase.buyandapply", 0.9)
                     a.mouseMove(buy)
                     a.sleep(400)
                     a.mouseMove(buy.add(0, 40)) # More
@@ -253,24 +251,38 @@ while True:
                         a.sleep(700)
                     elif a.findClick("vikings.store.apply"): # or Apply
                         a.sleep(700)
+                    a.sleep(150)
                     a.mouseClick(770, 170) # X close
                     a.sleep(600)
                 elif a.find("vikings.tileamountof"):
-                    killedInvaders = killedInvaders + 1
-                    print("invader %s was killed in %s shots! killed %s invaders" % (invaderName, shots, killedInvaders))
-                    a.sleep(1200)
-                    while a.find("vikings.Xclose") == True:
-                        a.sleep(100)
-                        a.findClick("vikings.Xclose")
+                    if (shots > 0):
+                        killedInvaders = killedInvaders + 1
+                        print("invader %s was killed in %s shots! killed %s invaders" % (invaderName, shots, killedInvaders))
+                    a.sleep(1100)
+                    while a.findSimilar("vikings.Xclose", 0.9) == True:
+                        a.sleep(150)
+                        a.mouseClick(a.findSimilarPos("vikings.Xclose", 0.9))
+                        print("closing...")
                         a.sleep(300)
                         a.mouseMove(a.mousePos().add(50, 10))
-                        a.sleep(500)
+                        a.sleep(200)
                         a.grab(lair.p1, lair.p2)
                     break
-                elif a.find("vikings.watchtower.navigator"):
-                    killedInvaders = killedInvaders + 1
-                    print("invader %s was killed in %s shots! killed %s invaders" % (invaderName, shots, killedInvaders))
+                elif a.findSimilar("vikings.watchtower.navigator", 0.9):
+                    if (shots > 0):
+                        killedInvaders = killedInvaders + 1
+                        print("invader %s was killed in %s shots! killed %s invaders" % (invaderName, shots, killedInvaders))
                     a.sleep(300)
+                    break
+                elif a.findSimilar("vikings.location.nolonger", 0.9):
+                    while a.findSimilar("vikings.Xclose", 0.9) == True:
+                        a.sleep(150)
+                        a.mouseClick(a.findSimilarPos("vikings.Xclose", 0.9))
+                        print("closing...")
+                        a.sleep(300)
+                        a.mouseMove(a.mousePos().add(50, 10))
+                        a.sleep(200)
+                        a.grab(lair.p1, lair.p2)
                     break
                 a.sleep(150)
         else:
