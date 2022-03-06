@@ -22,7 +22,7 @@ maxHits = 0
 #invaderName = "barbarian"
 #invaderName = "centurion"
 
-#invaderName = "invader"
+invaderName = "invader"
 
 #invaderName = "abbysguard"
 #invaderName = "northernvulture"
@@ -35,9 +35,9 @@ maxHits = 0
 #invaderName = "marshnixa"
 #invaderName = "twilightfox"
 
-invaderName = "ghosts"
+#invaderName = "ghosts"
 
-maxHits = 24 # -1
+maxHits = 17 # -1
 # ... config
 
 print ("configuration: invaderName=%s, maxHits=%s" % (invaderName, maxHits))
@@ -86,7 +86,7 @@ while True:
         scrollCount = 0
         while a.find("vikings.invaders."+invaderName) == False:            
             a.sleep(200)
-            a.mouseWheel(300)
+            a.mouseWheel(310)
             a.sleep(850)
             a.grab(watchtower.p1, watchtower.p2)
             scrollCount = scrollCount + 1
@@ -98,7 +98,7 @@ while True:
             shouldJump = False
             invaderPos = a.findPos("vikings.invaders."+invaderName)
             a.searchRect(Position(invaderPos.x, invaderPos.y-40), Position(invaderPos.x+740, invaderPos.y+140))
-            shouldJump = not (a.find("vikings.watchtower.1km") or a.find("vikings.watchtower.2km") or a.find("vikings.watchtower.3km") or a.find("vikings.watchtower.4km") or a.find("vikings.watchtower.5km") or a.find("vikings.watchtower.6km") or a.find("vikings.watchtower.7km") or a.find("vikings.watchtower.8km"))# or a.find("vikings.watchtower.9km") or a.find("vikings.watchtower.10km") or a.find("vikings.watchtower.11km") or a.find("vikings.watchtower.12km"))
+            shouldJump = not (a.find("vikings.watchtower.1km") or a.find("vikings.watchtower.2km") or a.find("vikings.watchtower.3km") or a.find("vikings.watchtower.4km") or a.find("vikings.watchtower.5km") or a.find("vikings.watchtower.6km") or a.find("vikings.watchtower.7km") or a.find("vikings.watchtower.8km"))# or a.find("vikings.watchtower.9km") or a.find("vikings.watchtower.10km") or a.find("vikings.watchtower.11km") or a.find("vikings.watchtower.12km") or a.find("vikings.watchtower.13km") or a.find("vikings.watchtower.14km"))# or a.find("vikings.watchtower.15km") or a.find("vikings.watchtower.16km") or a.find("vikings.watchtower.17km") or a.find("vikings.watchtower.18km") or a.find("vikings.watchtower.19km") or a.find("vikings.watchtower.20km"))
 
             if shouldJump:
                 print("jumping...")
@@ -188,10 +188,28 @@ while True:
                             a.grab(wnd.p1, wnd.p2)
                             
                 a.mouseClick(wndC.add(-resultPosition.x, -resultPosition.y))
+                # while a.find("vikings.watchtowerbutton") == False:
+                    # print("watchtowerbutton not found")
+                    # a.grab(toolbar.p1, toolbar.p2)
+                    # a.searchRect(toolbar.p1, toolbar.p2)
+                    # if a.findClick("vikings.watchtowerbutton"):
+                        # print("watchtowerbutton found and clicked")
+                        # a.sleep(400)
+                        # a.mouseMove(a.mousePos().add(50, 80))
+                        # break
+                    # a.grab(watchtower.p1, watchtower.p2)
+                    # a.searchRect(watchtower.p1, watchtower.p2)
+                    # a.sleep(350)
             else:
                 print("searching Info...")
                 a.searchRect(invaderPos, Position(invaderPos.x+740, invaderPos.y+100))
+                # if a.find("vikings.watchtower.info"):
                 a.findClick("vikings.watchtower.info")
+                # else:
+                    # a.mouseWheel(110)
+                    # a.sleep(850)
+                    # a.grab(watchtower.p1, watchtower.p2)
+                    # a.findClick("vikings.watchtower.info")
 
             print("ready to kill")
             a.sleep(600)
@@ -227,6 +245,7 @@ while True:
                 elif a.find("vikings.store"):
                     a.sleep(150)
                     a.findClick("vikings.store")
+                    a.mouseMove(a.mousePos().add(15, 35))
                     a.sleep(400)
                     a.grab(lair.p1, lair.p2)
                     if a.find("vikings.store"):

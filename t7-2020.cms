@@ -1,23 +1,46 @@
 ﻿WAITMS(500)
-LCLICK(763,560) // обучить
+//LCLICK(763,560) // обучить - убийцы т7
+//LCLICK(369,833)  // обучить - шпионы т7
+LCLICK(590,817)  // обучить - луки т7
+
 WAITMS(650)
 LCLICK(758,513)  // ввод числа
-WAITMS(100)
+WAITMS(250)
 LCLICK(758,513)  // ввод числа
 WAITMS(400)
-KEYSTRING("3940000")
-WAITMS(350)
-LCLICK(598,566)  // обучить
+KEYSTRING("18960000")
 WAITMS(450)
+LCLICK(598,566)  // обучить
+WAITMS(850)
 LCLICK(821,828)  // ускорить
 WAITMS(650)
-MOVE(670,477)  // применить 15д
+
+//LCLICK(763,863)  // scroll
+//WAITMS(1150)
+
+MOVE(658,484)  // применить 15д
+//MOVE(710,626)  // применить 7д
+//MOVE(710,626)  // применить 3д
+//MOVE(667,823)  // применить 15h
 WAITMS(450)
-LCLICK(669,528)  // больше
+LCLICK(664,520)  // больше 15д    
+//LCLICK(687,669)  // больше 7д    
+//LCLICK(687,669)  // больше 3д
+//LCLICK(662,779)  // больше 15h
 WAITMS(350)
-LCLICK(713,687)  // 41
+
+LCLICK(717,683)  // 129 (15д) / 234 (7д)
 WAITMS(450)
+
+//LCLICK(680,581)  // text
+//WAITMS(250)
+//LCLICK(680,581)  // text
+//WAITMS(250)
+//KEYSTRING("234")
+//WAITMS(350)
+
+
 LCLICK(349,820)  // применить
-WAITMS(450)
-KEYSTRING(2)
-WAITMS(150)
+//WAITMS(650)
+//KEYSTRING("2")
+WAITMS(350)        
